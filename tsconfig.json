@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "lib": ["es2015"],
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictFunctionTypes": true,
+    "strictNullChecks": true,
+    "baseUrl": "./",
+    "typeRoots": ["./"],
+    "types": [],
+    "noEmit": true,
+    "resolveJsonModule": true
+  },
+  "files": ["index.d.ts"]
+}

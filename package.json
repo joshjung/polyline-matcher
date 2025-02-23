@@ -1,0 +1,43 @@
+{
+  "name": "polyline-matcher",
+  "version": "1.0.0",
+  "description": "An algorithm to determine how closely one polyline fits a portion of another polyline.",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "url": "https://github.com/joshjung/polyline-matcher",
+  "homepage": "https://github.com/joshjung/polyline-matcher",
+  "scripts": {
+    "test": "jest test/polyline-fit.test.ts",
+    "release:major": "npm version major && git push --follow-tags && npm publish",
+    "release:minor": "npm version minor && git push --follow-tags && npm publish",
+    "release:patch": "npm version patch && git push --follow-tags && npm publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/joshjung/polyline-matcher.git"
+  },
+  "files": [
+    "src",
+    "index.d.ts",
+    "index.js"
+  ],
+  "keywords": [
+    "line",
+    "polyline",
+    "polygon",
+    "fit",
+    "match",
+    "search",
+    "compare"
+  ],
+  "devDependencies": {
+    "@jest/globals": "^29.5.0",
+    "jest": "^29.0.0",
+    "ts-jest": "^29.0.5",
+    "typescript": "^5.7.3"
+  },
+  "author": "Joshua Jung <joshua.p.jung@gmail.com>",
+  "email": "joshua.p.jung@gmail.com",
+  "license": "MIT",
+  "packageManager": "yarn@4.6.0+sha512.5383cc12567a95f1d668fbe762dfe0075c595b4bfff433be478dbbe24e05251a8e8c3eb992a986667c1d53b6c3a9c85b8398c35a960587fbd9fa3a0915406728"
+}
