@@ -32,7 +32,7 @@ class GridSpatialIndex {
             polyline: polylineWrapper.line,
             idx,
             bb,
-            source: polylineWrapper
+            target: polylineWrapper
           });
         }
       }
@@ -59,10 +59,10 @@ class GridSpatialIndex {
         const key = `${x},${y}`;
         if (this.cells.has(key)) {
           const cellSegments = this.cells.get(key);
-          for (const { polyline, id, idx, bb : cellBB, source } of cellSegments) {
+          for (const { polyline, id, idx, bb : cellBB, target } of cellSegments) {
             if (!resultsById[id] && bboxIntersect(testBB, cellBB)) {
               resultsById[id] = true;
-              results.add({ polyline, source, idx });
+              results.add({ polyline, target, idx });
             }
           }
         }

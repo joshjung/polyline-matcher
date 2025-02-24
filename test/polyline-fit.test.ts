@@ -1,5 +1,5 @@
 import {describe, it, expect} from '@jest/globals';
-import PolylineMatcher, {matchPolylines, Point, PolylineMatchResult} from '../index.js';
+import PolylineMatcher, {matchPolylines, Point, PolylineMatchResult, PolylineWrapper} from '../index.js';
 
 import * as target1 from './data/target1.json';
 import * as source1 from './data/source1.json';
@@ -7,7 +7,7 @@ import * as source1 from './data/source1.json';
 describe('PolylineMatcher', function() {
   describe('new PolylineMatcher() should work', function () {
     it('Should instantiate without error', function () {
-      const lf = new PolylineMatcher({
+      const matcher = new PolylineMatcher({
         maxPointDist: 1,
         idField: 'id',
         gridCellSize: 1000,
@@ -18,7 +18,7 @@ describe('PolylineMatcher', function() {
         ]
       });
 
-      expect(lf).toBeDefined();
+      expect(matcher).toBeDefined();
     });
   });
 
@@ -218,6 +218,47 @@ describe('PolylineMatcher', function() {
     })
   })
 
+  describe('PolylineMatcher sikmple', function() {
+    it('Should match simple lines properly', function () {
+      type TestWrapper = PolylineWrapper<{
+        id : number | string,
+        source : any
+      }>
+
+      /**
+       * Create two horizontal identical lines 1 unit vertically separated
+       */
+      const target : TestWrapper[] = [
+        { line: [{ x: 0, y: 0 }, { x: 10, y : 0 }], source: { id: 1 }, id: 1 },
+        { line: [{ x: 0, y: 1 }, { x: 10, y : 1 }], source: { id: 2 }, id: 2 }
+      ];
+
+      /**
+       * Create a target line that is closer to the top line (id 1)
+       */
+      const source : TestWrapper[] = [
+        { line: [{ x: 0, y: 0.1 }, { x: 10, y : 0.1 }], source: { id: 'a' }, id: 'a' }
+      ];
+
+      const matcher = new PolylineMatcher<TestWrapper>({
+        maxPointDist: 0.3,
+        minPointMatchPercentage: 1,
+        idField: 'id',
+        gridCellSize: 10,
+        targetPolylines: target
+      });
+
+      const matches = matcher.findMatchesForAll(source);
+
+      const actualMatchCount = matches[0].matches.length;
+
+      expect(actualMatchCount).toEqual(1);
+      expect(matches[0].source.id).toEqual('a');
+      expect(matches[0].matches[0].source.id).toEqual('a');
+      expect(matches[0].matches[0].target.id).toEqual(1);
+    });
+  });
+
   describe('PolylineMatcher should match complex polylines, use case 2', function() {
     const source1 = [
       {"x": -220968, "y": 997832},
@@ -359,7 +400,7 @@ describe('PolylineMatcher', function() {
 
   describe('PolylineMatcher should match complex polylines, use case 2', function() {
     it('Should match complicated source line against many target lines and match to only the expected lines', function () {
-      const lf = new PolylineMatcher<{ match? : boolean, id : number }>({
+      const matcher = new PolylineMatcher<{ match? : boolean, id : number }>({
         maxPointDist: 15000,
         minPointMatchPercentage: 0.75,
         idField: 'id',
@@ -367,7 +408,7 @@ describe('PolylineMatcher', function() {
         targetPolylines: target1
       });
 
-      const matches = lf.findMatchesForAll(source1);
+      const matches = matcher.findMatchesForAll(source1);
 
       const expectedMatchCount = target1.filter(t => t.match).length;
       const actualMatchCount = matches[0].matches.length;

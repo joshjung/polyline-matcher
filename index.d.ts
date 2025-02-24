@@ -22,11 +22,12 @@ export function matchPolylines(source : Polyline, target : Polyline, maxPointDis
 export type PolylineWrapperMatchResult<T> = {
   polyline : Polyline
   source : PolylineWrapper<T>
+  target : PolylineWrapper<T>
   matchResult : PolylineMatchResult
 }
 
 export type PolylineWrappersMatchResult<T> = {
-  sourceLine : PolylineWrapper
+  source : PolylineWrapper<T>
   matches : PolylineWrapperMatchResult<T>[]
 }
 

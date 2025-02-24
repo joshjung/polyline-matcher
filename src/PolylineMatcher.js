@@ -46,11 +46,11 @@ class PolylineMatcher {
 
     const results = [];
 
-    for (const { polyline, source } of potentialPolylines) {
+    for (const { polyline, target } of potentialPolylines) {
       const matchResult = matchPolylines(sourceLineWrapper.line, polyline, this.maxPointDist);
 
       if (matchResult.matchedPointPercentage >= this.minPointMatchPercentage) {
-        results.push({ polyline, source, matchResult });
+        results.push({ polyline, source: sourceLineWrapper, target, matchResult });
       }
     }
 
@@ -73,7 +73,7 @@ class PolylineMatcher {
 
       if (matches.length > 0) {
         results.push({
-          sourceLine: sourceLineWrapper,
+          source: sourceLineWrapper,
           matches
         });
       }
