@@ -1,5 +1,5 @@
 import {describe, it, expect} from '@jest/globals';
-import PolylineMatcher, {matchPolylines, Point, PolylineMatchResult, PolylineWrapper} from '../index.js';
+import {PolylineMatcher, matchPolylines, Point, PolylineMatchResult, PolylineWrapper} from '../index.js';
 
 import * as target1 from './data/target1.json';
 import * as source1 from './data/source1.json';

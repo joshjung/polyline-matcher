@@ -39,7 +39,7 @@ export type PolylineMatchOptions<T> = {
   targetPolylines: PolylineWrapper<T>[]
 }
 
-export default class PolylineMatcher<T> {
+export class PolylineMatcher<T> {
   constructor(options : PolylineMatchOptions<T>);
   findMatches(polyline: PolylineWrapper<T>) : PolylineWrapperMatchResult<T>[]
   findMatchesForAll(lineSetA : PolylineWrapper<T>[]) : PolylineWrappersMatchResult<T>[];

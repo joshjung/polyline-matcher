@@ -84,4 +84,5 @@ class PolylineMatcher {
 }
 
 module.exports.matchPolylines = matchPolylines;
+module.exports.PolylineMatcher = PolylineMatcher;
 module.exports.default = PolylineMatcher;
