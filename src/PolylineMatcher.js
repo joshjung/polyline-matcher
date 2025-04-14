@@ -63,8 +63,8 @@ class PolylineMatcher {
   findMatchesForAll(sourcePolylines) {
     const results = []; // Maps index of P_A to list of P_B indices
 
-    if (!sourcePolylines.length) {
-      throw new Error('No source polylines to match against');
+    if (!sourcePolylines) {
+      throw new Error('sourcePolylines was undefined or null');
     }
 
     // Step 2: Process each segment in set A
